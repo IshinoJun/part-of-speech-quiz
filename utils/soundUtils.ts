@@ -39,8 +39,12 @@ export async function buildSounds(quizList: Quiz[]): Promise<void> {
     const [response] = await client.synthesizeSpeech(request);
     if (response.audioContent) {
       const writeFile = util.promisify(fs.writeFile);
+      const path = `./public/sounds`;
+      if (!fs.existsSync(path)) {
+        fs.mkdirSync(path);
+      }
       await writeFile(
-        `./public/sounds/${quiz.word}.mp3`,
+        `${path}/${quiz.word}.mp3`,
         response.audioContent,
         'binary',
       );
