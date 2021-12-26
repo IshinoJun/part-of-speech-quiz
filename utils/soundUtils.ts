@@ -1,17 +1,25 @@
 import { protos, TextToSpeechClient } from '@google-cloud/text-to-speech';
+import crypto from 'crypto';
 import fs from 'fs';
+import { CredentialBody } from 'google-auth-library';
 import { google } from 'googleapis';
 import util from 'util';
 import { Quiz } from '../models/Quiz';
+import service from '../service-account.enc';
+
+const algorithm = 'aes-128-cbc';
+const decipher = crypto.createDecipheriv(
+  algorithm,
+  process.env.SERVICE_ENCRYPTION_KEY as string,
+  process.env.SERVICE_ENCRYPTION_IV as string,
+);
+let decryptedData = decipher.update(service.encrypted, 'hex', 'utf-8');
+decryptedData += decipher.final('utf8');
 
 const client = new TextToSpeechClient({
   auth: new google.auth.GoogleAuth({
     projectId: process.env.GOOGLE_PROJECTED,
-    credentials: {
-      private_key: process.env.GOOGLE_PRIVATE_KEY,
-      client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      client_id: process.env.GOOGLE_CLIENT_ID,
-    },
+    credentials: JSON.parse(decryptedData) as CredentialBody,
   }),
 });
 

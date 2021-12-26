@@ -15,6 +15,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "aspida": "^1.7.1",
+    "crypto": "^1.0.1",
     "framer-motion": "^4",
     "googleapis": "^92.0.0",
     "microcms-js-sdk": "^2.0.0",
