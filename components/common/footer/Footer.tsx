@@ -1,4 +1,4 @@
-import { Center, chakra, Icon } from '@chakra-ui/react';
+import { Center, chakra, Icon, Link } from '@chakra-ui/react';
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
 
@@ -11,7 +11,12 @@ export const Footer = (): JSX.Element => {
         borderTop='1px'
         borderTopColor='gray.400'
       >
-        <Icon as={FaGithub} color='gray.400' />
+        <Link
+          href='https://github.com/IshinoJun/part-of-speech-quiz'
+          target='_blank'
+        >
+          <Icon as={FaGithub} color='gray.400' />
+        </Link>
       </Center>
     </chakra.footer>
   );

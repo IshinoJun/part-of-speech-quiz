@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { MicroCMSListResponse } from 'microcms-js-sdk';
 import type { GetStaticProps, NextPage } from 'next';
+import Head from 'next/head';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Layout } from '../components/common/layout/Layout';
 import { QuizAnswerCard } from '../components/domain/quiz/QuizAnswerCard';
@@ -36,6 +37,7 @@ const Home: NextPage<Props> = ({ quizList }) => {
 
   const handleClickTop = useCallback(() => {
     setResultList([]);
+    setQuizSetting(QuizSettingType.FIXED);
     setStatus(QuizStatusType.SETTING);
   }, []);
 
@@ -58,7 +60,7 @@ const Home: NextPage<Props> = ({ quizList }) => {
   }, [quizList.contents]);
 
   useEffect(() => {
-    if (status === QuizStatusType.QUIZ) {
+    if (status === QuizStatusType.SETTING) {
       if (quizSetting === QuizSettingType.RANDOM) {
         setNewQuizList(random());
       } else {
@@ -68,31 +70,41 @@ const Home: NextPage<Props> = ({ quizList }) => {
   }, [quizList.contents, quizSetting, random, status]);
 
   return (
-    <Layout>
-      <Box as='main' py='16'>
-        {status === QuizStatusType.SETTING ? (
-          <QuizSettingCard
-            quizSetting={quizSetting}
-            onChangeQuizSetting={setQuizSetting}
-            onClickStart={handleClickStart}
-          />
-        ) : status === QuizStatusType.QUIZ ? (
-          <QuizAnswerCard
-            quizIndex={quizIndex}
-            resultList={resultList}
-            onChangeResultList={setResultList}
-            quizList={newQuizList}
-            onClickNext={handleClickNext}
-          />
-        ) : status === QuizStatusType.END ? (
-          <QuizEndCard
-            quizList={newQuizList}
-            resultList={resultList}
-            onClickTop={handleClickTop}
-          />
-        ) : null}
-      </Box>
-    </Layout>
+    <>
+      <Head>
+        <title>品詞クイズ</title>
+        <meta
+          name='description'
+          content='出題される単語がどの品詞に当てはまるか当てましょう！'
+        />
+        <link rel='icon' href='/favicon.png' />
+      </Head>
+      <Layout>
+        <Box as='main' py='16'>
+          {status === QuizStatusType.SETTING ? (
+            <QuizSettingCard
+              quizSetting={quizSetting}
+              onChangeQuizSetting={setQuizSetting}
+              onClickStart={handleClickStart}
+            />
+          ) : status === QuizStatusType.QUIZ ? (
+            <QuizAnswerCard
+              quizIndex={quizIndex}
+              resultList={resultList}
+              onChangeResultList={setResultList}
+              quizList={newQuizList}
+              onClickNext={handleClickNext}
+            />
+          ) : status === QuizStatusType.END ? (
+            <QuizEndCard
+              quizList={newQuizList}
+              resultList={resultList}
+              onClickTop={handleClickTop}
+            />
+          ) : null}
+        </Box>
+      </Layout>
+    </>
   );
 };
 
