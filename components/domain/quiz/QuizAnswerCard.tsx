@@ -128,7 +128,9 @@ export const QuizAnswerCard = ({
               <HStack justify='center'>
                 <Box pos='relative'>
                   <Text fontSize='6xl' color='gray.700'>{`${
-                    quizList[quizIndex].partOfSpeech === resultList[quizIndex]
+                    quizList[quizIndex].partOfSpeech.includes(
+                      resultList[quizIndex],
+                    )
                       ? '正解 🎉'
                       : '残念 😢'
                   }`}</Text>

@@ -50,8 +50,9 @@ export const QuizEndCard = ({
             <Center>
               <Text fontSize='6xl' color='gray.700'>
                 {`${
-                  resultList.filter((r, i) => quizList[i].partOfSpeech === r)
-                    .length
+                  resultList.filter((r, i) =>
+                    quizList[i].partOfSpeech.includes(r),
+                  ).length
                 } / ${quizList.length}`}
               </Text>
             </Center>
@@ -72,7 +73,7 @@ export const QuizEndCard = ({
                     <Td whiteSpace='nowrap'>{quizList[index].word}</Td>
                     <Td whiteSpace='nowrap'>{quizList[index].partOfSpeech}</Td>
                     <Td whiteSpace='nowrap'>{result}</Td>
-                    {result === quizList[index].partOfSpeech ? (
+                    {quizList[index].partOfSpeech.includes(result) ? (
                       <Td textAlign='right' color='cyan.600'>
                         <Icon as={IoEllipseOutline} />
                       </Td>
