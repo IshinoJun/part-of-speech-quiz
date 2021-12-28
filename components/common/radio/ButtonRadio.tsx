@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md';
+import { NoSSR } from '../nossr/NoSSR';
 
 const RadioBox = chakra('div', {
   baseStyle: {
@@ -47,28 +48,30 @@ export const ButtonRadio = (props: ButtonRadioProps): JSX.Element => {
   };
 
   return (
-    <label style={{ width: '100%' }} {...getLabelProps()}>
-      <input {...getInputProps()} aria-labelledby={id} />
-      <RadioBox {...getCheckboxProps()} _checked={checkedStyles} id={id}>
-        <VStack spacing='4'>
-          <VStack textAlign='center' spacing='0'>
-            <Box
-              aria-hidden
-              fontSize='4xl'
-              color={state.isChecked ? 'cyan.600' : undefined}
-            >
-              {icon}
-            </Box>
-            <Text fontWeight='extrabold' fontSize='xl' color='gray.700'>
-              {label}
-            </Text>
-            <Text fontSize='sm' color='gray.600'>
-              {description}
-            </Text>
+    <NoSSR>
+      <label style={{ width: '100%' }} {...getLabelProps()}>
+        <input {...getInputProps()} aria-labelledby={id} />
+        <RadioBox {...getCheckboxProps()} _checked={checkedStyles} id={id}>
+          <VStack spacing='4'>
+            <VStack textAlign='center' spacing='0'>
+              <Box
+                aria-hidden
+                fontSize='4xl'
+                color={state.isChecked ? 'cyan.600' : undefined}
+              >
+                {icon}
+              </Box>
+              <Text fontWeight='extrabold' fontSize='xl' color='gray.700'>
+                {label}
+              </Text>
+              <Text fontSize='sm' color='gray.600'>
+                {description}
+              </Text>
+            </VStack>
+            <CheckboxIcon checked={state.isChecked} />
           </VStack>
-          <CheckboxIcon checked={state.isChecked} />
-        </VStack>
-      </RadioBox>
-    </label>
+        </RadioBox>
+      </label>
+    </NoSSR>
   );
 };

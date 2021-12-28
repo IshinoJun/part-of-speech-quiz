@@ -14,6 +14,7 @@ export const Footer = (): JSX.Element => {
         <Link
           href='https://github.com/IshinoJun/part-of-speech-quiz'
           target='_blank'
+          aria-label='github-link'
         >
           <Icon as={FaGithub} color='gray.400' />
         </Link>

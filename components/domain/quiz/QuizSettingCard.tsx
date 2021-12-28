@@ -35,7 +35,7 @@ export const QuizSettingCard = ({
   return (
     <Card
       title='出題方法の選択'
-      subTitle='出題される単語がどの品詞か当てましょう！出題方法を選択してStartを押してください！'
+      subTitle='出題される英単語がどの品詞か当てましょう！出題方法を選択してStartを押してください！'
     >
       <Divider />
       <Box pt='6' pb='12'>
@@ -65,7 +65,7 @@ export const QuizSettingCard = ({
             />
             <Button
               variant='outline'
-              bg='cyan.500'
+              bg='cyan.600'
               color='white'
               onClick={onClickStart}
             >

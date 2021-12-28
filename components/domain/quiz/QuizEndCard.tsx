@@ -3,6 +3,7 @@ import {
   Button,
   Center,
   Divider,
+  Icon,
   Stack,
   Table,
   Tbody,
@@ -12,6 +13,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+import { IoClose, IoEllipseOutline } from 'react-icons/io5';
 import { Quiz } from '../../../models/Quiz';
 import { Card } from '../../common/card/Card';
 
@@ -28,8 +30,8 @@ export const QuizEndCard = ({
 }: Props): JSX.Element => {
   const COLUMNS = [
     { Header: '単語', accessor: 'word' },
-    { Header: '解答', accessor: 'answer' },
     { Header: '正解', accessor: 'partOfSpeech' },
+    { Header: '解答', accessor: 'answer' },
   ] as const;
 
   return (
@@ -53,43 +55,39 @@ export const QuizEndCard = ({
                 } / ${quizList.length}`}
               </Text>
             </Center>
-            <Box overflow='scroll'>
-              <Table my='8' borderWidth='1px' fontSize='sm'>
-                <Thead bg='gray.50'>
-                  <Tr>
-                    {COLUMNS.map((column, index) => (
-                      <Th whiteSpace='nowrap' scope='col' key={index}>
-                        {column.Header}
-                      </Th>
-                    ))}
-                    <Th />
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {resultList.map((row, index) => (
-                    <Tr key={index}>
-                      <Td whiteSpace='nowrap'>{quizList[index].word}</Td>
-                      <Td whiteSpace='nowrap'>
-                        {quizList[index].partOfSpeech}
-                      </Td>
-                      <Td whiteSpace='nowrap'>{row}</Td>
-                      {row === quizList[index].partOfSpeech ? (
-                        <Td textAlign='right' color='cyan.600'>
-                          ○
-                        </Td>
-                      ) : (
-                        <Td textAlign='right' color='red.600'>
-                          ×
-                        </Td>
-                      )}
-                    </Tr>
+            <Table borderWidth='1px' fontSize='sm'>
+              <Thead bg='gray.50'>
+                <Tr>
+                  {COLUMNS.map((column, index) => (
+                    <Th whiteSpace='nowrap' scope='col' key={index}>
+                      {column.Header}
+                    </Th>
                   ))}
-                </Tbody>
-              </Table>
-            </Box>
+                  <Th />
+                </Tr>
+              </Thead>
+              <Tbody>
+                {resultList.map((result, index) => (
+                  <Tr key={index}>
+                    <Td whiteSpace='nowrap'>{quizList[index].word}</Td>
+                    <Td whiteSpace='nowrap'>{quizList[index].partOfSpeech}</Td>
+                    <Td whiteSpace='nowrap'>{result}</Td>
+                    {result === quizList[index].partOfSpeech ? (
+                      <Td textAlign='right' color='cyan.600'>
+                        <Icon as={IoEllipseOutline} />
+                      </Td>
+                    ) : (
+                      <Td textAlign='right' color='red.600'>
+                        <Icon as={IoClose} />
+                      </Td>
+                    )}
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
             <Button
               variant='outline'
-              bg='cyan.500'
+              bg='cyan.600'
               color='white'
               onClick={onClickTop}
             >

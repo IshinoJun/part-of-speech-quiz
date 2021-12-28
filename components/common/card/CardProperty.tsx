@@ -16,6 +16,7 @@ export const CardProperty = (props: Props): JSX.Element => {
       py='4'
       _even={{ bg: useColorModeValue('gray.50', 'gray.600') }}
       {...flexProps}
+      pos='relative'
     >
       <Box as='dt' minWidth='180px'>
         {label}

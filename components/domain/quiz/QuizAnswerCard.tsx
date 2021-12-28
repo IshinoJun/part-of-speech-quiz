@@ -17,6 +17,7 @@ import useSound from 'use-sound';
 import { Quiz } from '../../../models/Quiz';
 import { Card } from '../../common/card/Card';
 import { CardProperty } from '../../common/card/CardProperty';
+import { NoSSR } from '../../common/nossr/NoSSR';
 
 interface Props {
   quizList: Quiz[];
@@ -41,7 +42,7 @@ export const QuizAnswerCard = ({
     { label: '単語', key: 'word' },
     { label: '意味', key: 'meaning' },
     { label: '品詞', key: 'partOfSpeech' },
-    { label: '接続詞', key: 'suffix' },
+    { label: '接尾辞', key: 'suffix' },
   ] as const;
 
   const handleClickRadio = useCallback(
@@ -101,21 +102,23 @@ export const QuizAnswerCard = ({
                   />
                 </Box>
               </HStack>
-              <RadioGroup
-                onChange={handleClickRadio}
-                value={resultList[quizIndex]}
-              >
-                <Stack direction='row' justifyContent='center'>
-                  {QUIZ_OPTIONS.map((option) => (
-                    <Radio value={option} key={option}>
-                      {option}
-                    </Radio>
-                  ))}
-                </Stack>
-              </RadioGroup>
+              <NoSSR>
+                <RadioGroup
+                  onChange={handleClickRadio}
+                  value={resultList[quizIndex]}
+                >
+                  <Stack direction='row' justifyContent='center'>
+                    {QUIZ_OPTIONS.map((option) => (
+                      <Radio value={option} key={option}>
+                        {option}
+                      </Radio>
+                    ))}
+                  </Stack>
+                </RadioGroup>
+              </NoSSR>
               <Button
                 variant='outline'
-                bg='cyan.500'
+                bg='cyan.600'
                 color='white'
                 disabled={!resultList[quizIndex]}
                 onClick={handleClickAnswer}
@@ -145,7 +148,7 @@ export const QuizAnswerCard = ({
               </Box>
               <Button
                 variant='outline'
-                bg='cyan.500'
+                bg='cyan.600'
                 color='white'
                 onClick={handleClickNext}
               >
