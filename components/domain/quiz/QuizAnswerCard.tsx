@@ -17,7 +17,6 @@ import useSound from 'use-sound';
 import { Quiz } from '../../../models/Quiz';
 import { Card } from '../../common/card/Card';
 import { CardProperty } from '../../common/card/CardProperty';
-import { NoSSR } from '../../common/nossr/NoSSR';
 
 interface Props {
   quizList: Quiz[];
@@ -102,20 +101,23 @@ export const QuizAnswerCard = ({
                   />
                 </Box>
               </HStack>
-              <NoSSR>
-                <RadioGroup
-                  onChange={handleClickRadio}
-                  value={resultList[quizIndex]}
-                >
-                  <Stack direction='row' justifyContent='center'>
-                    {QUIZ_OPTIONS.map((option) => (
-                      <Radio value={option} key={option}>
-                        {option}
-                      </Radio>
-                    ))}
-                  </Stack>
-                </RadioGroup>
-              </NoSSR>
+              <RadioGroup
+                onChange={handleClickRadio}
+                value={resultList[quizIndex]}
+              >
+                <Stack direction='row' justifyContent='center'>
+                  {QUIZ_OPTIONS.map((option) => (
+                    <Radio
+                      value={option}
+                      key={option}
+                      id={option}
+                      name={option}
+                    >
+                      {option}
+                    </Radio>
+                  ))}
+                </Stack>
+              </RadioGroup>
               <Button
                 variant='outline'
                 bg='cyan.600'

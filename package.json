@@ -1,6 +1,6 @@
 {
   "name": "parts-of-speech-quiz",
-  "private": true,
+  "description": "This is a quiz on the parts of speech of English words.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
