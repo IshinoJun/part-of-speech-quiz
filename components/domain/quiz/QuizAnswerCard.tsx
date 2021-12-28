@@ -107,12 +107,7 @@ export const QuizAnswerCard = ({
               >
                 <Stack direction='row' justifyContent='center'>
                   {QUIZ_OPTIONS.map((option) => (
-                    <Radio
-                      value={option}
-                      key={option}
-                      id={option}
-                      name={option}
-                    >
+                    <Radio value={option} key={option}>
                       {option}
                     </Radio>
                   ))}

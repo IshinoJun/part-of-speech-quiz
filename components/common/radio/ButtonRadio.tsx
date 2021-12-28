@@ -2,6 +2,7 @@ import {
   Box,
   chakra,
   Text,
+  useId,
   useRadio,
   UseRadioProps,
   VStack,
@@ -38,6 +39,7 @@ export const ButtonRadio = (props: ButtonRadioProps): JSX.Element => {
   const { label, icon, description } = props;
   const { getCheckboxProps, getInputProps, getLabelProps, state } =
     useRadio(props);
+  const id = useId();
 
   const checkedStyles = {
     bg: 'cyan.50',
@@ -46,13 +48,8 @@ export const ButtonRadio = (props: ButtonRadioProps): JSX.Element => {
 
   return (
     <label style={{ width: '100%' }} {...getLabelProps()}>
-      <input
-        {...getInputProps()}
-        id={label}
-        name={label}
-        aria-labelledby={label}
-      />
-      <RadioBox {...getCheckboxProps()} _checked={checkedStyles} id={label}>
+      <input {...getInputProps()} aria-labelledby={id} />
+      <RadioBox {...getCheckboxProps()} _checked={checkedStyles} id={id}>
         <VStack spacing='4'>
           <VStack textAlign='center' spacing='0'>
             <Box
