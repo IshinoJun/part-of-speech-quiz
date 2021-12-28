@@ -1,7 +1,7 @@
 {
   "name": "parts-of-speech-quiz",
   "description": "This is a quiz on the parts of speech of English words.",
-  "license": "UNLICENSED",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
