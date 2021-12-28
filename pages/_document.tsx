@@ -1,6 +1,6 @@
 import { Head, Html, Main, NextScript } from 'next/document';
 
-const MyDocument = () => {
+const MyDocument = (): JSX.Element => {
   const url = '<https://example.com>';
   const title = '品詞クイズ';
   const description =
