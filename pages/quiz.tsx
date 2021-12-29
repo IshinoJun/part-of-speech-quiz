@@ -21,7 +21,7 @@ const Quiz: NextPage<Props> = ({ quizList }) => {
   const router = useRouter();
   const [resultList, setResultList] = useState<string[]>([]);
   const [quizIndex, setQuizIndex] = useState(0);
-  const [newQuizList, setNewQuizList] = useState(quizList.contents);
+  const [newQuizList, setNewQuizList] = useState<Quiz[] | null>(null);
   const [isEnd, setIsEnd] = useBoolean();
   useWarningOnExit(!isEnd);
 
@@ -53,6 +53,8 @@ const Quiz: NextPage<Props> = ({ quizList }) => {
       setNewQuizList(quizList.contents);
     }
   }, [quizList.contents, randomList, router.query.type]);
+
+  if (!newQuizList) return <>...loading</>;
 
   return (
     <>
