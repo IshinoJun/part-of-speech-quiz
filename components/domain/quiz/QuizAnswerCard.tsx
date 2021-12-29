@@ -120,7 +120,7 @@ export const QuizAnswerCard = ({
                 disabled={!resultList[quizIndex]}
                 onClick={handleClickAnswer}
               >
-                回答
+                解答
               </Button>
             </Stack>
           ) : (
