@@ -56,36 +56,40 @@ export const QuizEndCard = ({
                 } / ${quizList.length}`}
               </Text>
             </Center>
-            <Table borderWidth='1px' fontSize='sm'>
-              <Thead bg='gray.50'>
-                <Tr>
-                  {COLUMNS.map((column, index) => (
-                    <Th whiteSpace='nowrap' scope='col' key={index}>
-                      {column.Header}
-                    </Th>
-                  ))}
-                  <Th />
-                </Tr>
-              </Thead>
-              <Tbody>
-                {resultList.map((result, index) => (
-                  <Tr key={index}>
-                    <Td whiteSpace='nowrap'>{quizList[index].word}</Td>
-                    <Td whiteSpace='nowrap'>{quizList[index].partOfSpeech}</Td>
-                    <Td whiteSpace='nowrap'>{result}</Td>
-                    {quizList[index].partOfSpeech.includes(result) ? (
-                      <Td textAlign='right' color='cyan.600'>
-                        <Icon as={IoEllipseOutline} />
-                      </Td>
-                    ) : (
-                      <Td textAlign='right' color='red.600'>
-                        <Icon as={IoClose} />
-                      </Td>
-                    )}
+            <Box overflow='scroll'>
+              <Table borderWidth='1px' fontSize='sm'>
+                <Thead bg='gray.50'>
+                  <Tr>
+                    {COLUMNS.map((column, index) => (
+                      <Th whiteSpace='nowrap' scope='col' key={index}>
+                        {column.Header}
+                      </Th>
+                    ))}
+                    <Th />
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
+                </Thead>
+                <Tbody>
+                  {resultList.map((result, index) => (
+                    <Tr key={index}>
+                      <Td whiteSpace='nowrap'>{quizList[index].word}</Td>
+                      <Td whiteSpace='nowrap'>
+                        {quizList[index].partOfSpeech}
+                      </Td>
+                      <Td whiteSpace='nowrap'>{result}</Td>
+                      {quizList[index].partOfSpeech.includes(result) ? (
+                        <Td textAlign='right' color='cyan.600'>
+                          <Icon as={IoEllipseOutline} />
+                        </Td>
+                      ) : (
+                        <Td textAlign='right' color='red.600'>
+                          <Icon as={IoClose} />
+                        </Td>
+                      )}
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </Box>
             <Button
               variant='outline'
               bg='cyan.600'
